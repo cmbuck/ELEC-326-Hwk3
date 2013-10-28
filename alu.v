@@ -20,6 +20,18 @@ output reg [31:0] aluResult, targetAddr;
    // 6: Output set to TRUE if operands are equal; else set to FALSE.
    // 7: Output set to TRUE if operand1 is less than operand2 interpreted as signed integers; else set to FALSE.
       
+always @(*)
+begin
+	case (aluOp)
+	3'h1:	aluResult = operand1 + operand2;
+	3'h2:	aluResult = operand1 - operand2;
+	3'h3:	aluResult = operand1 & operand2;
+	3'h4:	aluResult = operand1 | operand2;
+	3'h5:	aluResult = operand1 < operand2;
+	3'h6:	aluResult = operand1 == operand2;
+	3'h7:	aluResult = $signed(operand1) < $signed(operand2);
+	default:	aluResult = 32'hx;
+	endcase
 
    // Target Address for Branch
    //  Sign-extend the lower 16 bits of  "addrInfo", scale it by 4, and add to  "pc".  
@@ -27,7 +39,7 @@ output reg [31:0] aluResult, targetAddr;
    // Target Address for Jump
    // The 26-bit "addrInfo" is scaled by 4 and concatenated to the 4 high-order bits of "pc". 
 
-
+end
 
 endmodule
 
