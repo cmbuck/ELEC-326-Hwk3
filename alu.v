@@ -35,9 +35,13 @@ begin
 
    // Target Address for Branch
    //  Sign-extend the lower 16 bits of  "addrInfo", scale it by 4, and add to  "pc".  
+if (branch == 1'b1)
+	targetAddr = ({{16{addrInfo[15]} }, addrInfo[15:0] } << 2) + pc;
 
    // Target Address for Jump
    // The 26-bit "addrInfo" is scaled by 4 and concatenated to the 4 high-order bits of "pc". 
+else if (jump == 1'b1)
+	targetAddr = { pc[31:28], addrInfo << 2 };
 
 end
 
