@@ -5,6 +5,10 @@ alu  myALU(op, data1, data2, isJump, isBranch, pc, offset, ALUOut, JumpAddr);
 
 `define FALSE 0
 `define TRUE 1
+`define debug(A)	$display("%x",A);
+`define assertEquals(A,B) if (A !== B) begin \
+					$display("ASSERTION FAILED %x !== %x",A,B); \
+					end
 
    
 reg [31:0] data1,  data2, pc;
@@ -34,7 +38,12 @@ end
 
       #2;      isJump = `TRUE;
 
-      #2;      isJump = `FALSE;		   		        
+      #2;      isJump = `FALSE;		  
+
+		//op = 1; data1 = 32'h1; data2 = 32'h1;
+		#2;
+		`debug(data1)	`debug(data2)
+		`assertEquals(ALUOut, 32'h2)
    end // always @ (*)
    
 
@@ -61,8 +70,6 @@ end
 
    
 endmodule // alu_testbench
-
-
 
 
 
