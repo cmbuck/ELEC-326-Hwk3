@@ -42,8 +42,8 @@ end
 
 		//op = 1; data1 = 32'h1; data2 = 32'h1;
 		#2;
-		`debug(data1)	`debug(data2)
-		`assertEquals(ALUOut, 32'h2)
+		//`debug(data1)	`debug(data2)
+		//`assertEquals(ALUOut, 32'h2)
    end // always @ (*)
    
 
